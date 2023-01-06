@@ -121,6 +121,7 @@ data:
         - robot-gitee-ascend-label
         - robot-gitee-ascend-lgtm
         - robot-gitee-ascend-tide
+        - robot-gitee-ascend-review-trigger-new
 
         cann/acl:
         - robot-gitee-cann-approve
@@ -157,45 +158,44 @@ data:
         - robot-gitee-edahelper-cla
 
         mindspore/docs:
-        - robot-gitee-mindspore-review-trigger
+        - robot-gitee-mindspore-review-trigger-new
+
+        mindspore/mindspore:
+        - robot-gitee-mindspore-review-trigger-new
 
         mindspore/course:
         - robot-gitee-mindspore-review-trigger
         
         mindspore:
         - robot-gitee-mindspore-cla
+        - robot-gitee-mindspore-tide
 
         mindspore/golden-stick:
         - robot-gitee-mindspore-label
-        - robot-gitee-mindspore-tide
         - robot-gitee-mindspore-lifecycle
         - robot-gitee-mindspore-assign
         - robot-gitee-mindspore-review-trigger
 
         mindspore/federated:
         - robot-gitee-mindspore-label
-        - robot-gitee-mindspore-tide
         - robot-gitee-mindspore-lifecycle
         - robot-gitee-mindspore-assign
         - robot-gitee-mindspore-review-trigger
 
         mindspore/text:
         - robot-gitee-mindspore-label
-        - robot-gitee-mindspore-tide
         - robot-gitee-mindspore-lifecycle
         - robot-gitee-mindspore-assign
         - robot-gitee-mindspore-review-trigger
 
         mindspore/mindpandas:
         - robot-gitee-mindspore-label
-        - robot-gitee-mindspore-tide
         - robot-gitee-mindspore-lifecycle
         - robot-gitee-mindspore-assign
         - robot-gitee-mindspore-review-trigger
 
         mindspore/recommender:
         - robot-gitee-mindspore-label
-        - robot-gitee-mindspore-tide
         - robot-gitee-mindspore-lifecycle
         - robot-gitee-mindspore-assign
         - robot-gitee-mindspore-review-trigger
@@ -339,6 +339,11 @@ data:
         events:
         - "Merge Request Hook"
         - "Note Hook"
+      - name: robot-gitee-ascend-review-trigger-new
+        endpoint: http://service-review-trigger-new.robot-gitee-ascend.svc.cluster.local:8888/gitee-hook
+        events:
+        - "Merge Request Hook"
+        - "Note Hook"
       - name: ci-tools
         endpoint: http://citoolservice.ci-tools-service.svc.cluster.local/review/
         events:
@@ -421,6 +426,11 @@ data:
         - "Note Hook"
       - name: robot-gitee-mindspore-review-trigger
         endpoint: http://service-review-trigger.robot-gitee-mindspore.svc.cluster.local:8888/gitee-hook
+        events:
+        - "Merge Request Hook"
+        - "Note Hook"
+      - name: robot-gitee-mindspore-review-trigger-new
+        endpoint: http://service-review-trigger-new.robot-gitee-mindspore.svc.cluster.local:8888/gitee-hook
         events:
         - "Merge Request Hook"
         - "Note Hook"
