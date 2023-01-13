@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/custom-http-errors: 400,500
+    nginx.ingress.kubernetes.io/proxy-body-size: 2m
+  name: helios-server-ingress
+  namespace: helios-server
+spec:
+  tls:
+  - hosts:
+    - helios-voting2.test.osinfra.cn
+    secretName: helios-server-tls
+  rules:
+  - host: helios-voting2.test.osinfra.cn
+    http:
+      path:
+        backend:
+          serviceName: helios-server-service
+          servicePort: 80
+        path: /
