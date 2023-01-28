@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: helios-server-service
+  namespace: helios-server
+spec:
+  ports:
+  - name: http-port
+    protocol: TCP
+    port: 80
+    targetPort: 8000
+  selector:
+    app: helios-server
+  type: ClusterIP
