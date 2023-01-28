@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helios-server
+  namespace: helios-server
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: helios-server
+  template:
+    metadata:
+      labels:
+        app: helios-server
+    spec:
+      containers:
+      - name: helios-server
+        image: swr.cn-north-4.myhuaweicloud.com/opensourceway/helios-server/helios-voting:master-545cf1e
+        env:
+        - name: GH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: GH_CLIENT_ID
+              name: helios-server-secret
+        - name: GH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: GH_CLIENT_SECRET
+              name: helios-server-secret
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: GOOGLE_CLIENT_ID
+              name: helios-server-secret
+        - name: GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: GOOGLE_CLIENT_SECRET
+              name: helios-server-secret
+        - name: GITEE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: GITEE_CLIENT_ID
+              name: helios-server-secret
+        - name: GITEE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: GITEE_CLIENT_SECRET
+              name: helios-server-secret
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: DB_HOST
+              name: helios-server-secret
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              key: DB_PORT
+              name: helios-server-secret
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              key: DB_USER
+              name: helios-server-secret
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: DB_PASSWORD
+              name: helios-server-secret
+        - name: EMAIL_HOST
+          valueFrom:
+            secretKeyRef:
+              key: EMAIL_HOST
+              name: helios-server-secret
+        - name: EMAIL_PORT
+          valueFrom:
+            secretKeyRef:
+              key: EMAIL_PORT
+              name: helios-server-secret
+        - name: EMAIL_HOST_USER
+          valueFrom:
+            secretKeyRef:
+              key: EMAIL_HOST_USER
+              name: helios-server-secret
+        - name: EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: EMAIL_HOST_PASSWORD
+              name: helios-server-secret
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 2000Mi
+          limits:
+            cpu: 3000m
+            memory: 3000Mi
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 3600
+          failureThreshold: 3
+          successThreshold: 1
+          periodSeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 3600
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 5
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+      imagePullSecrets:
+      - name: huawei-swr-image-pull-secret
