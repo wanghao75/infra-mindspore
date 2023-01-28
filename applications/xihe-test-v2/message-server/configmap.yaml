@@ -5,7 +5,7 @@ metadata:
 data:
   config.yaml: |
     training_endpoint: http://service-training-center-huaweicloud.xihe-test-v2.svc.cluster.local:8888/api/v1/training
-    finetune_endpoint: http://service-finetune.xihe-test-v2.svc.cluster.local:8888
+    finetune_endpoint: http://service-finetune.xihe-test-v2.svc.cluster.local:8888/api/v1/finetune
 
     mongodb:
       db_conn: "${MONGODB_CONNECTION}"
@@ -94,6 +94,7 @@ data:
       topics:
         fork: "xihe_fork_test"
         like: "xihe_like_test"
+        download: "xihe_download_test"
         evaluate: "xihe_evaluate_test"
         training: "xihe_training_test"
         finetune: "xihe_finetune_test"

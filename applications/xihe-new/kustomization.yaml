@@ -13,6 +13,8 @@ resources:
 - xihe-server
 - xihe-script
 - big-model-finetune
+- finetune
+- xihe-statistics
 namespace: xihe-new
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
