@@ -16,6 +16,7 @@ data:
       - ci-bot
       excluded_repos:
       - openeuler/docs
+      - openeuler/kernel
       community_name: openEuler
       community_repo: community
       branch: master
